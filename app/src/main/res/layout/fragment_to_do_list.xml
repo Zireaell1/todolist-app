@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".presentation.todolist.ToDoListFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:contentInsetStart="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/search_bar_background"
+            android:orientation="horizontal"
+            android:paddingStart="0dp"
+            android:paddingEnd="16dp">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/search_icon"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:src="@drawable/baseline_search_24">
+
+            </ImageButton>
+
+            <EditText
+                android:id="@+id/search_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:hint="@string/search_bar_hint"
+                android:imeOptions="actionSearch"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:textColor="?colorOnSurface"
+                android:textColorHint="?colorOnSurfaceVariant">
+
+            </EditText>
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/chip_background">
+
+                <Spinner
+                    android:id="@+id/sort_dropdown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="30dp">
+
+                </Spinner>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/chip_background">
+
+                <Spinner
+                    android:id="@+id/category_dropdown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="30dp">
+
+                </Spinner>
+            </RelativeLayout>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/show_done_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="4dp"
+                android:checkable="true"
+                android:text="@string/show_done"
+                android:textColor="?colorOnSurface"
+                app:chipMinTouchTargetSize="0dp">
+
+            </com.google.android.material.chip.Chip>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.google.android.material.divider.MaterialDivider>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/todos_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="1"
+            tools:listitem="@layout/to_do_list_item">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            android:contentDescription="@string/add_note_icon"
+            android:src="@drawable/baseline_add_24_fab">
+
+        </com.google.android.material.floatingactionbutton.FloatingActionButton>
+    </FrameLayout>
+</LinearLayout>

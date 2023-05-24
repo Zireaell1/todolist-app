@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lista zadań</string>
+    <string name="search_bar_hint">Szukaj notatek</string>
+    <string name="search_icon">Ikona wyszukiwania</string>
+    <string name="action_todolist">Notatki</string>
+    <string name="action_settings">Ustawienia</string>
+    <string name="settings_notifications_reminder_time_title">Czas powiadomień</string>
+    <string name="settings_notifications_reminder_time_details">Ile minut przed czasem wykonania zadania powinno być wyświetlone powiadomienie</string>
+    <string name="show_done">Pokaż zakończone</string>
+    <string name="add_note_icon">Ikona dodawania notatki</string>
+    <string name="state">Zakończone</string>
+    <string name="note_title_hint">Tytuł</string>
+    <string name="note_description_hint">Opis</string>
+    <string name="note_attachments_hint">Dodaj załączniki</string>
+    <string name="save_note_icon">Ikona zapisu notatki</string>
+    <string name="sort_asc">Rosnąco</string>
+    <string name="sort_desc">Malejąco</string>
+    <string name="category_none">Brak</string>
+    <string name="time">Ustaw czas</string>
+    <string name="notifications">Powiadomienia</string>
+    <string name="settings_category_title">Kategorie</string>
+    <string name="settings_category_details">Zarządzaj kategoriami. Kliknij na kategorie na liście, aby ją usunąć</string>
+    <string name="settings_category_add">Dodaj nową</string>
+    <string name="add_category_dialog_title">Dodaj nową kategorię</string>
+    <string name="add_category_dialog_input_hint">Nazwa kategorii</string>
+    <string name="add_category_dialog_positive">Dodaj</string>
+    <string name="add_category_dialog_negative">Anuluj</string>
+    <string name="notification_channel_name">Powiadomienia ToDo</string>
+    <string name="notification_channel_description">Powiadomienia związane z czasem zakończenia ToDo, jeśli zostały włączone</string>
+    <string name="close_icon">Ikona zamknięcia</string>
+    <string name="delete_icon">Ikona usuwania</string>
+    <string name="save_file_icon">Ikona zapisu pliku</string>
+    <string name="todo_state_icon">Ikona stanu ToDo</string>
+</resources>

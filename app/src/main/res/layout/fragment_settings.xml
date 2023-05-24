@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".presentation.settings.SettingsFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_notifications_reminder_time_title"
+                android:textColor="?colorOnSurfaceVariant"
+                android:textSize="16sp">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_notifications_reminder_time_details"
+                android:textColor="?colorOnSurfaceVariant"
+                android:textSize="11sp">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <Spinner
+            android:id="@+id/notifications_reminder_time_dropdown"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:spinnerMode="dropdown">
+
+        </Spinner>
+    </LinearLayout>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.google.android.material.divider.MaterialDivider>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_category_title"
+                android:textColor="?colorOnSurfaceVariant"
+                android:textSize="16sp">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_category_details"
+                android:textColor="?colorOnSurfaceVariant"
+                android:textSize="11sp">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/add_category_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableLeft="@drawable/baseline_add_24"
+            android:drawableTint="?colorOnPrimary"
+            android:text="@string/settings_category_add">
+
+        </Button>
+    </LinearLayout>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.google.android.material.divider.MaterialDivider>
+
+    <ListView
+        android:id="@+id/category_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
+</LinearLayout>

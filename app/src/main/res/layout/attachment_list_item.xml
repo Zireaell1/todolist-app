@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?colorSurface"
+    android:gravity="center_vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/file_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="?colorOnSurfaceVariant"
+        tools:text="File name placeholder">
+
+    </TextView>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </View>
+
+    <ImageButton
+        android:id="@+id/save_file_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/save_file_icon"
+        android:src="@drawable/baseline_file_download_24">
+
+    </ImageButton>
+
+    <ImageButton
+        android:id="@+id/remove_file_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/delete_icon"
+        android:src="@drawable/baseline_delete_outline_24">
+
+    </ImageButton>
+
+
+</LinearLayout>
