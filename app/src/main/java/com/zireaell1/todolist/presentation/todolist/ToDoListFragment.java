@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.chip.Chip;
@@ -153,6 +154,11 @@ public class ToDoListFragment extends Fragment {
 
         List<ToDo> items = new ArrayList<>();
         RecyclerView recyclerView = view.findViewById(R.id.todos_list);
+        if (this.getResources().getBoolean(R.bool.isTablet)) {
+            recyclerView.setLayoutManager(new GridLayoutManager(requireActivity(), 3));
+        } else {
+            recyclerView.setLayoutManager(new GridLayoutManager(requireActivity(), 1));
+        }
         View.OnClickListener onClickListener = new ToDoListOnClickListener(recyclerView, items, (position, item) -> {
             Intent intent = new Intent(getActivity(), ToDoEditActivity.class);
             intent.putExtra("toDoId", item.getId());

@@ -131,8 +131,6 @@
             android:layout_height="wrap_content"
             android:paddingStart="4dp"
             android:paddingEnd="4dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="1"
             tools:listitem="@layout/to_do_list_item">
 
         </androidx.recyclerview.widget.RecyclerView>
