@@ -20,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
+            android:textColor="?colorOnSurface"
             android:textSize="16sp"
             tools:text="Title">
 
@@ -29,6 +30,7 @@
             android:id="@+id/category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="?colorOnSurfaceVariant"
             android:textSize="12sp"
             tools:text="Category">
 
@@ -62,6 +64,7 @@
             android:id="@+id/completion_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="?colorOnSurface"
             android:textSize="12sp"
             tools:text="Completion date">
 
@@ -80,6 +83,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
+        android:textColor="?colorOnSurface"
         tools:text="Description">
 
     </TextView>
@@ -105,6 +109,7 @@
             android:fontFamily="sans-serif-thin"
             android:paddingStart="0dp"
             android:paddingEnd="8dp"
+            android:textColor="?colorOnSurfaceVariant"
             android:textSize="12sp"
             tools:text="Create date">
 
@@ -118,6 +123,7 @@
             android:gravity="center"
             android:paddingStart="8dp"
             android:paddingEnd="0dp"
+            android:textColor="?colorOnSurfaceVariant"
             android:textSize="16sp"
             app:drawableStartCompat="@drawable/outline_description_24"
             tools:text="Attachments">

@@ -31,4 +31,14 @@
     <string name="delete_icon">Delete icon</string>
     <string name="save_file_icon">Save file icon</string>
     <string name="todo_state_icon">ToDo state icon</string>
+    <string name="delete_category_dialog_title">Delete category</string>
+    <string name="delete_category_dialog_message">Are you sure you want to delete %s category?</string>
+    <string name="delete_category_dialog_positive">Delete</string>
+    <string name="delete_category_dialog_negative">Cancel</string>
+    <string name="attachment_size" translatable="false">(%s B)</string>
+    <string name="todos_empty">Create new notes by tapping + button</string>
+    <string name="delete_todo_dialog_title">Delete ToDo</string>
+    <string name="delete_todo_dialog_message">Are you you want to delete ToDo?</string>
+    <string name="delete_todo_dialog_positive">Delete</string>
+    <string name="delete_todo_dialog_negative">Cancel</string>
 </resources>

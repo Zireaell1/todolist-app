@@ -7,26 +7,58 @@
     android:gravity="center_vertical"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/file_name"
+    <ImageView
+        android:id="@+id/file_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="?colorOnSurfaceVariant"
-        tools:text="File name placeholder">
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
+        tools:src="@drawable/audio_file_24px">
 
-    </TextView>
+    </ImageView>
 
-    <View
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-    </View>
+        <TextView
+            android:id="@+id/file_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:textColor="?colorOnSurfaceVariant"
+            tools:text="File name placeholder">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/file_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?colorOnSurfaceVariant"
+            android:textSize="11sp"
+            tools:text="File size placeholder">
+
+        </TextView>
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/open_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/open_in_new_24px">
+
+    </ImageButton>
 
     <ImageButton
         android:id="@+id/save_file_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/save_file_icon"

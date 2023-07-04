@@ -32,4 +32,13 @@
     <string name="delete_icon">Ikona usuwania</string>
     <string name="save_file_icon">Ikona zapisu pliku</string>
     <string name="todo_state_icon">Ikona stanu ToDo</string>
+    <string name="delete_category_dialog_title">Usuń kategorię</string>
+    <string name="delete_category_dialog_message">Czy jesteś pewien, że chcesz usunąć kategorię %s?</string>
+    <string name="delete_category_dialog_positive">Usuń</string>
+    <string name="delete_category_dialog_negative">Anuluj</string>
+    <string name="todos_empty">Utwórz nowe notatki klikając przycisk +</string>
+    <string name="delete_todo_dialog_title">Usuń ToDo</string>
+    <string name="delete_todo_dialog_message">Czy jesteś pewien, że chcesz usunąć ToDo?</string>
+    <string name="delete_todo_dialog_positive">Usuń</string>
+    <string name="delete_todo_dialog_negative">Anuluj</string>
 </resources>

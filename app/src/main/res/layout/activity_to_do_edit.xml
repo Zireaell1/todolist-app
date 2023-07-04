@@ -132,38 +132,43 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/title"
+                    style="?attr/textInputFilledStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/note_title_hint"
-                    android:importantForAutofill="no"
-                    android:inputType="text"
-                    android:textColor="?colorOnSurfaceVariant"
-                    android:textColorHint="?colorOnSurfaceVariant"
-                    android:textSize="24sp">
+                    android:hint="@string/note_title_hint">
 
-                </EditText>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                <EditText
+                    </com.google.android.material.textfield.TextInputEditText>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/description"
+                    style="?attr/textInputFilledStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:gravity="top"
-                    android:hint="@string/note_description_hint"
-                    android:importantForAutofill="no"
-                    android:inputType="text|textMultiLine"
-                    android:textColor="?colorOnSurfaceVariant"
-                    android:textColorHint="?colorOnSurfaceVariant">
+                    android:hint="@string/note_description_hint">
 
-                </EditText>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="5000">
+
+                    </com.google.android.material.textfield.TextInputEditText>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <LinearLayout
                     android:id="@+id/attachments_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
                     android:orientation="vertical">
 
                 </LinearLayout>
@@ -171,8 +176,6 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="16dp"
                     android:background="@drawable/chip_background">
 
                     <Button

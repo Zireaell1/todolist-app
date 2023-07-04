@@ -15,13 +15,14 @@ import com.zireaell1.todolist.domain.entities.ToDoState;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 
 public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListViewHolder> {
+    public final List<ToDo> items;
     private final View.OnClickListener onClickListener;
-    public List<ToDo> list;
 
-    public ToDoListAdapter(List<ToDo> list, View.OnClickListener onClickListener) {
-        this.list = list;
+    public ToDoListAdapter(List<ToDo> items, View.OnClickListener onClickListener) {
+        this.items = items;
         this.onClickListener = onClickListener;
     }
 
@@ -38,9 +39,9 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ToDoListViewHolder holder, int position) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy\nHH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy | HH:mm");
 
-        ToDo toDo = list.get(position);
+        ToDo toDo = items.get(position);
 
         holder.title.setText(toDo.getTitle());
         holder.category.setText(toDo.getCategoryName());
@@ -49,16 +50,18 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListViewHolder> {
         holder.completionDate.setText(formattedCompletionDate);
         if (toDo.getState() == ToDoState.IN_PROGRESS) {
             holder.completionState.setVisibility(View.INVISIBLE);
+        } else {
+            holder.completionState.setVisibility(View.VISIBLE);
         }
         holder.description.setText(toDo.getDescription());
         LocalDateTime createDate = toDo.getCreateDate();
         String formattedCreateDate = createDate.format(formatter);
         holder.createDate.setText(formattedCreateDate);
-        holder.attachments.setText(String.format("%d", toDo.getAttachmentCount()));
+        holder.attachments.setText(String.format(Locale.getDefault(), "%d", toDo.getAttachmentCount()));
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return items.size();
     }
 }

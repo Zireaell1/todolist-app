@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
@@ -33,11 +35,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.CompletableFuture;
 
 public class ToDoListFragment extends Fragment {
     private ToDoListViewModel toDoListViewModel;
-    private ToDoListAdapter adapter;
 
     public ToDoListFragment() {
     }
@@ -54,7 +54,7 @@ public class ToDoListFragment extends Fragment {
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == Activity.RESULT_OK) {
-                        refresh();
+                        toDoListViewModel.loadToDos();
                     }
                 }
         );
@@ -63,7 +63,7 @@ public class ToDoListFragment extends Fragment {
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == Activity.RESULT_OK) {
-                        refresh();
+                        toDoListViewModel.loadToDos();
                     }
                 }
         );
@@ -80,7 +80,7 @@ public class ToDoListFragment extends Fragment {
             if (i == EditorInfo.IME_ACTION_SEARCH) {
                 if (!Objects.equals(toDoListViewModel.searchQuery, textView.getText().toString())) {
                     toDoListViewModel.searchQuery = textView.getText().toString();
-                    refresh();
+                    toDoListViewModel.loadToDos();
                     return true;
                 }
             }
@@ -99,7 +99,7 @@ public class ToDoListFragment extends Fragment {
                     SortItem sortItem = sortAdapter.getItem(position);
                     toDoListViewModel.sortMethod = sortItem.getSortMethod();
                     toDoListViewModel.sortDropdownSelectedItemId = position;
-                    refresh();
+                    toDoListViewModel.loadToDos();
                 }
             }
 
@@ -110,28 +110,30 @@ public class ToDoListFragment extends Fragment {
         });
 
         Spinner categoryDropdown = view.findViewById(R.id.category_dropdown);
-        CompletableFuture<List<Category>> futureCategories = toDoListViewModel.getCategories().execute();
-        futureCategories.thenAccept(categories -> {
-            categories.add(0, new Category(-1, getString(R.string.category_none)));
-            SpinnerCategoryAdapter categoryAdapter = new SpinnerCategoryAdapter(getContext(), android.R.layout.simple_spinner_dropdown_item, categories);
-            categoryDropdown.setAdapter(categoryAdapter);
-            categoryDropdown.setSelection(toDoListViewModel.categoryDropdownSelectedItemId);
-            categoryDropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    if (toDoListViewModel.categoryDropdownSelectedItemId != position) {
-                        Category selectedCategory = categoryAdapter.getItem(position);
-                        toDoListViewModel.categoryId = selectedCategory.getId();
-                        toDoListViewModel.categoryDropdownSelectedItemId = position;
-                        refresh();
-                    }
+        SpinnerCategoryAdapter categoryAdapter = new SpinnerCategoryAdapter(getContext(), android.R.layout.simple_spinner_dropdown_item, new ArrayList<>());
+        categoryDropdown.setAdapter(categoryAdapter);
+        categoryDropdown.setSelection(toDoListViewModel.categoryDropdownSelectedItemId);
+        categoryDropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (toDoListViewModel.categoryDropdownSelectedItemId != position) {
+                    Category selectedCategory = categoryAdapter.getItem(position);
+                    toDoListViewModel.categoryId = selectedCategory.getId();
+                    toDoListViewModel.categoryDropdownSelectedItemId = position;
+                    toDoListViewModel.loadToDos();
                 }
+            }
 
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-                }
-            });
+            }
+        });
+
+        toDoListViewModel.getCategoriesState().observe(getViewLifecycleOwner(), categoriesState -> {
+            categoryAdapter.items.clear();
+            categoryAdapter.items.addAll(categoriesState);
+            categoryAdapter.notifyDataSetChanged();
         });
 
         Chip showDoneButton = view.findViewById(R.id.show_done_button);
@@ -145,7 +147,7 @@ public class ToDoListFragment extends Fragment {
                     toDoListViewModel.state = ToDoState.IN_PROGRESS;
                     toDoListViewModel.stateChipIsChecked = false;
                 }
-                refresh();
+                toDoListViewModel.loadToDos();
             }
         });
 
@@ -157,14 +159,24 @@ public class ToDoListFragment extends Fragment {
 
             toDoListViewModel.toDoEditActivityLauncher.launch(intent);
         });
-        adapter = new ToDoListAdapter(items, onClickListener);
-        recyclerView.setAdapter(adapter);
+        ToDoListAdapter toDosAdapter = new ToDoListAdapter(items, onClickListener);
+        recyclerView.setAdapter(toDosAdapter);
 
-        CompletableFuture<List<ToDo>> futureToDos = toDoListViewModel.getToDos().execute(toDoListViewModel.sortMethod, toDoListViewModel.categoryId, toDoListViewModel.state, toDoListViewModel.searchQuery);
-        futureToDos.thenAccept(toDos -> {
-            adapter.list.clear();
-            adapter.list.addAll(toDos);
-            adapter.notifyDataSetChanged();
+        toDoListViewModel.getToDosState().observe(getViewLifecycleOwner(), toDosState -> {
+            TextView todosEmpty = view.findViewById(R.id.todos_empty);
+            ProgressBar toDosLoading = view.findViewById(R.id.todos_loading);
+            if (toDosState.isEmpty()) {
+                toDosAdapter.items.clear();
+                toDosAdapter.notifyDataSetChanged();
+                todosEmpty.setVisibility(View.VISIBLE);
+                toDosLoading.setVisibility(View.INVISIBLE);
+            } else {
+                toDosAdapter.items.clear();
+                toDosAdapter.items.addAll(toDosState);
+                toDosAdapter.notifyDataSetChanged();
+                toDosLoading.setVisibility(View.INVISIBLE);
+                todosEmpty.setVisibility(View.INVISIBLE);
+            }
         });
 
         FloatingActionButton addButton = view.findViewById(R.id.add_button);
@@ -173,15 +185,9 @@ public class ToDoListFragment extends Fragment {
             toDoListViewModel.toDoAddActivityLauncher.launch(intent);
         });
 
-        return view;
-    }
+        toDoListViewModel.loadToDos();
+        toDoListViewModel.loadCategories(getContext());
 
-    private void refresh() {
-        CompletableFuture<List<ToDo>> futureToDos = toDoListViewModel.getToDos().execute(toDoListViewModel.sortMethod, toDoListViewModel.categoryId, toDoListViewModel.state, toDoListViewModel.searchQuery);
-        futureToDos.thenAccept(toDos -> requireActivity().runOnUiThread(() -> {
-            adapter.list.clear();
-            adapter.list.addAll(toDos);
-            adapter.notifyDataSetChanged();
-        }));
+        return view;
     }
 }

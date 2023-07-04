@@ -14,7 +14,7 @@ import com.zireaell1.todolist.domain.entities.Category;
 import java.util.List;
 
 public class SpinnerCategoryAdapter extends ArrayAdapter<Category> {
-    private final List<Category> items;
+    public final List<Category> items;
 
     public SpinnerCategoryAdapter(Context context, int textViewResourceId, List<Category> items) {
         super(context, textViewResourceId, items);

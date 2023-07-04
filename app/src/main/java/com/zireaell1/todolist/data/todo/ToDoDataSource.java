@@ -126,6 +126,16 @@ public class ToDoDataSource implements ToDoRepository {
         return attachments;
     }
 
+    @Override
+    public void deleteAttachmentByFilePath(String filePath) {
+        toDoDao.deleteAttachmentByFilePath(filePath);
+    }
+
+    @Override
+    public void removeCategoryFromToDo(int categoryId) {
+        toDoDao.removeCategoryFromToDo(categoryId);
+    }
+
     private ToDoEntity toToDoEntity(ToDo toDo) {
         return new ToDoEntity(toDo.getId(), toDo.getTitle(), toDo.getDescription(), toDo.getCreateDate(), toDo.getCompletionDate(), toDo.getState(), toDo.isNotifications(), toDo.getCategoryId());
     }

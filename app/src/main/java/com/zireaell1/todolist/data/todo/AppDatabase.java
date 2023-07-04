@@ -14,7 +14,7 @@ import com.zireaell1.todolist.data.todo.entities.CategoryEntity;
 import com.zireaell1.todolist.data.todo.entities.ToDoEntity;
 import com.zireaell1.todolist.data.todo.views.ToDoView;
 
-@Database(entities = {ToDoEntity.class, CategoryEntity.class, AttachmentEntity.class}, views = {ToDoView.class}, version = 7)
+@Database(entities = {ToDoEntity.class, CategoryEntity.class, AttachmentEntity.class}, views = {ToDoView.class}, version = 9)
 @TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase instance;

@@ -17,8 +17,8 @@ import com.zireaell1.todolist.domain.entities.Category;
 import java.util.List;
 
 public class CategoryListAdapter extends ArrayAdapter<Category> {
+    public final List<Category> items;
     private final @LayoutRes int resource;
-    public List<Category> items;
 
     public CategoryListAdapter(Context context, @LayoutRes int resource, List<Category> items) {
         super(context, resource, items);

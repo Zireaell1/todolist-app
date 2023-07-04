@@ -18,7 +18,6 @@ import com.zireaell1.todolist.presentation.todoedit.ToDoEditActivity;
 
 public class AlarmReceiver extends BroadcastReceiver {
     private final static String NOTIFICATION_CHANNEL_ID = "1";
-    private final static int NOTIFICATION_ID = 0;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -50,6 +49,6 @@ public class AlarmReceiver extends BroadcastReceiver {
             // request the missing permission
             return;
         }
-        notificationManager.notify(NOTIFICATION_ID, builder.build());
+        notificationManager.notify(toDoId, builder.build());
     }
 }

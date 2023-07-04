@@ -5,10 +5,14 @@ import android.content.Intent;
 import android.net.Uri;
 
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.zireaell1.todolist.R;
 import com.zireaell1.todolist.data.config.ConfigDataSource;
 import com.zireaell1.todolist.data.todo.ToDoDataSource;
+import com.zireaell1.todolist.domain.entities.Category;
 import com.zireaell1.todolist.domain.entities.ToDoState;
 import com.zireaell1.todolist.domain.repositories.ConfigRepository;
 import com.zireaell1.todolist.domain.repositories.ToDoRepository;
@@ -24,12 +28,15 @@ import com.zireaell1.todolist.domain.usecases.interfaces.GetConfig;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class ToDoAddViewModel extends ViewModel {
+    public final List<Uri> fileUris;
     private final AddToDo addToDo;
     private final GetCategories getCategories;
     private final AddAttachment addAttachment;
     private final GetConfig getConfig;
+    private final MutableLiveData<List<Category>> categoriesState = new MutableLiveData<>();
     public int categoryId;
     public ToDoState state;
     public boolean notifications;
@@ -44,7 +51,6 @@ public class ToDoAddViewModel extends ViewModel {
     public boolean isTimeSet;
     public ActivityResultLauncher<Intent> chooseFileLauncher;
     public ActivityResultLauncher<Intent> saveFileLauncher;
-    public List<Uri> fileUris;
     public Uri fileToSave;
 
     public ToDoAddViewModel(Context context) {
@@ -88,5 +94,17 @@ public class ToDoAddViewModel extends ViewModel {
 
     public GetConfig getConfig() {
         return getConfig;
+    }
+
+    public LiveData<List<Category>> getCategoriesState() {
+        return categoriesState;
+    }
+
+    public void loadCategories(Context context) {
+        CompletableFuture<List<Category>> futureCategories = getCategories.execute();
+        futureCategories.thenAccept(categories -> {
+            categories.add(0, new Category(-1, context.getString(R.string.category_none)));
+            categoriesState.postValue(categories);
+        });
     }
 }

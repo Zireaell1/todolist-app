@@ -6,10 +6,10 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.zireaell1.todolist.data.todo.views.ToDoView;
 import com.zireaell1.todolist.data.todo.entities.AttachmentEntity;
 import com.zireaell1.todolist.data.todo.entities.CategoryEntity;
 import com.zireaell1.todolist.data.todo.entities.ToDoEntity;
+import com.zireaell1.todolist.data.todo.views.ToDoView;
 import com.zireaell1.todolist.domain.entities.ToDoState;
 
 import java.util.List;
@@ -46,6 +46,12 @@ public interface ToDoDao {
 
     @Delete
     int deleteAttachments(List<AttachmentEntity> attachments);
+
+    @Query("DELETE FROM attachments WHERE filePath = :filePath")
+    void deleteAttachmentByFilePath(String filePath);
+
+    @Query("UPDATE todos SET categoryId = -1 WHERE categoryId = :categoryId")
+    void removeCategoryFromToDo(int categoryId);
 
     @Query("SELECT * FROM todoview " +
             "WHERE (:categoryId = -1 OR categoryId = :categoryId) " +

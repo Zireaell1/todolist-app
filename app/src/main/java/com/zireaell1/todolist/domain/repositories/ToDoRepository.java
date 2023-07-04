@@ -36,4 +36,8 @@ public interface ToDoRepository {
     ToDo getToDo(int toDoId);
 
     List<Attachment> getAttachments(int toDoId);
+
+    void deleteAttachmentByFilePath(String filePath);
+
+    void removeCategoryFromToDo(int categoryId);
 }
